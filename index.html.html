@@ -1,0 +1,1465 @@
+ <!DOCTYPE html>
+<html lang="hi" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="theme-color" content="#4f46e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2942/2942789.png">
+    
+    <title>IT Branch Portal | Pro Version</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    colors: {
+                        primary: '#4f46e5', 
+                        secondary: '#0ea5e9', 
+                        darkBg: '#0b1120',
+                        cardDark: '#1e293b'
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Styles & Scrollbar */
+        body { 
+            transition: background-color 0.5s, color 0.5s; 
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0) 0, transparent 50%);
+        }
+        .dark body {
+            background-color: #0f172a;
+            background-image: radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        /* Fallback: Standard cursor for interactive elements */
+        a, button, input, textarea, select { cursor: pointer; }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            transition: all 0.3s ease;
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark .glass-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .active-class {
+            border-left: 4px solid #4f46e5;
+            background: linear-gradient(to right, rgba(79, 70, 229, 0.08), transparent);
+        }
+        .dark .active-class {
+            border-left: 4px solid #818cf8;
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.15), transparent);
+        }
+
+        .typewriter {
+            display: inline-block;
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: 3px solid #0ea5e9; 
+            width: 9.5ch; 
+            animation: typing 4s steps(10) infinite alternate, blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% { width: 0; opacity: 0; }
+            10% { opacity: 1; }
+            100% { width: 9.5ch; opacity: 1; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #0ea5e9; }
+        }
+
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-20deg); }
+            50% { transform: rotate(10deg); }
+            75% { transform: rotate(-20deg); }
+        }
+
+        /* 2. Scroll Snapping */
+        .snap-container {
+            scroll-snap-type: y proximity;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        .snap-section {
+            scroll-snap-align: start;
+            scroll-margin-top: 80px;
+        }
+
+        /* 3. Skeleton Loading (Shimmer Effect) */
+        .skeleton-loader {
+            background: #eee;
+            background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+            border-radius: 5px;
+            background-size: 200% 100%;
+            animation: 1.5s shimmer linear infinite;
+        }
+        .dark .skeleton-loader {
+            background: #1e293b;
+            background: linear-gradient(110deg, #1e293b 8%, #334155 18%, #1e293b 33%);
+            background-size: 200% 100%;
+        }
+        @keyframes shimmer {
+            to { background-position-x: -200%; }
+        }
+
+        /* 4. Button Ripple Effect */
+        .ripple-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 600ms linear;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .dark .ripple { background-color: rgba(255, 255, 255, 0.3); }
+        @keyframes ripple-anim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* 5. 3D Flip Cards */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 100px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        /* 6. Pure CSS Tooltips */
+        .css-tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .css-tooltip::before,
+        .css-tooltip::after {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .css-tooltip::before {
+            content: '';
+            border: 6px solid transparent;
+            border-top-color: #1e293b;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+        }
+        .css-tooltip::after {
+            content: attr(data-tooltip);
+            background: #1e293b;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            white-space: nowrap;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .dark .css-tooltip::before { border-top-color: #4f46e5; }
+        .dark .css-tooltip::after { background: #4f46e5; color: white;}
+        
+        .css-tooltip:hover::before,
+        .css-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* 7. CSS Scroll-Driven Animations */
+        @keyframes reveal-up {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes reveal-left {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes reveal-right {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @supports (animation-timeline: view()) {
+            .scroll-animate-up {
+                animation: reveal-up linear both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 30%;
+            }
+            .scroll-animate-left {
+                animation: reveal-left linear both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 30%;
+            }
+            .scroll-animate-right {
+                animation: reveal-right linear both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 30%;
+            }
+        }
+        @supports not (animation-timeline: view()) {
+            .scroll-animate-up { animation: reveal-up 0.8s ease forwards; opacity: 0;}
+            .scroll-animate-left { animation: reveal-left 0.8s ease forwards; opacity: 0;}
+            .scroll-animate-right { animation: reveal-right 0.8s ease forwards; opacity: 0;}
+        }
+    </style>
+</head>
+<body class="text-slate-800 dark:text-slate-200 min-h-screen flex flex-col relative overflow-x-hidden snap-container">
+
+    <!-- Background Blobs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-40 dark:opacity-20">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- SPLASH SCREEN ANIMATION -->
+    <div id="splash-screen" class="fixed inset-0 z-[9999] bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
+            <div class="absolute inset-0 border-4 border-t-primary border-r-transparent border-b-secondary border-l-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-2 border-4 border-t-transparent border-r-emerald-400 border-b-transparent border-l-purple-500 rounded-full animate-[spin_1.5s_reverse_infinite]"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-4xl sm:text-5xl text-primary dark:text-white animate-pulse">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-500 to-secondary animate-pulse tracking-widest">
+            IT BRANCH
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 mt-2 text-xs sm:text-sm font-bold tracking-[0.3em] animate-bounce">LOADING...</p>
+    </div>
+
+    <!-- SECURE LOGIN SECTION (No hints!) -->
+    <div id="login-section" class="hidden fixed inset-0 z-[1000] bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-md flex flex-col items-center justify-center transition-opacity duration-700 p-4">
+        <div class="glass-card rounded-3xl p-8 sm:p-10 w-full max-w-md shadow-2xl border border-white/20 animate-slide-up relative overflow-hidden">
+            <div class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 rounded-full bg-primary opacity-10 blur-2xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 rounded-full bg-secondary opacity-10 blur-2xl"></div>
+            
+            <div class="text-center mb-8 relative z-10">
+                <div class="w-16 h-16 bg-gradient-to-tr from-primary to-secondary text-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-lg shadow-primary/30">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-white">Student Login</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Kripya portal access karne ke liye apni details daalein</p>
+            </div>
+
+            <form id="login-form" class="space-y-5 relative z-10">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Student ID</label>
+                    <input type="text" id="login-id" required placeholder="Student ID" class="w-full p-3.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Password</label>
+                    <input type="password" id="login-pass" required placeholder="••••••••" class="w-full p-3.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner">
+                </div>
+                <div id="login-error" class="hidden text-red-500 text-xs font-bold text-center bg-red-100 dark:bg-red-900/30 py-2 rounded-lg border border-red-200 dark:border-red-800">
+                    ID ya Password galat hai!
+                </div>
+                <button type="submit" class="ripple-btn w-full py-3.5 bg-gradient-to-r from-primary via-indigo-500 to-secondary text-white rounded-xl font-extrabold transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5">
+                    <i class="fa-solid fa-right-to-bracket mr-2"></i> Login Karein
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <noscript>
+        <div style="background-color: #ef4444; color: white; padding: 15px; text-align: center; font-weight: bold;">Error: JavaScript blocked. Open in "Google Chrome"!</div>
+    </noscript>
+    <div id="internet-warning" style="background-color: #f59e0b; color: white; padding: 15px; text-align: center; font-weight: bold;">Internet Data ON karein aur file ko "Google Chrome" mein open karein!</div>
+
+    <!-- MAIN APP CONTENT (Hidden till Login) -->
+    <div id="main-app-content" class="hidden opacity-0 transition-opacity duration-500 flex-1 flex flex-col">
+        <nav class="sticky top-0 z-50 bg-white/70 dark:bg-cardDark/70 backdrop-blur-xl border-b border-white/20 dark:border-slate-700/50 px-4 sm:px-8 py-3 sm:py-4 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-2 sm:gap-3 group cursor-pointer css-tooltip" data-tooltip="IT Department Portal">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-primary via-indigo-500 to-secondary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 shrink-0">
+                    <i class="fa-solid fa-laptop-code text-sm sm:text-base"></i>
+                </div>
+                <div>
+                    <div class="flex items-center h-6 sm:h-8">
+                        <h1 class="typewriter text-base sm:text-xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-primary animate-gradient pr-1">
+                            IT Branch
+                        </h1>
+                    </div>
+                    <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wide mt-0.5" id="current-date">Loading...</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 sm:gap-4">
+                <button id="install-app-btn" class="ripple-btn flex items-center gap-1.5 bg-gradient-to-r from-emerald-400 to-emerald-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl font-bold text-[10px] sm:text-sm shadow-lg shadow-emerald-500/30 transition hover:scale-105 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-download animate-bounce"></i> <span class="hidden sm:inline">Install App</span>
+                </button>
+
+                <div class="hidden sm:flex items-center gap-2 bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm px-3 py-1.5 rounded-xl font-mono text-sm font-bold text-primary dark:text-indigo-400 shrink-0 border border-slate-200 dark:border-slate-700 css-tooltip" data-tooltip="Live System Clock">
+                    <i class="fa-regular fa-clock animate-pulse"></i> <span id="live-clock">00:00</span>
+                </div>
+
+                <button id="theme-toggle" class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary transition-all hover:scale-110 flex items-center justify-center shrink-0 shadow-sm css-tooltip" data-tooltip="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
+                </button>
+
+                <!-- Logout button -->
+                <button onclick="logout()" class="ripple-btn w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center bg-red-500/10 text-red-500 border border-red-200 dark:border-red-900 rounded-xl font-bold shadow-sm transition hover:scale-105 hover:bg-red-500 hover:text-white shrink-0 css-tooltip" data-tooltip="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </nav>
+
+        <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+            
+            <div class="snap-section scroll-animate-up relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-indigo-600 to-purple-600 p-6 sm:p-10 text-white shadow-2xl shadow-indigo-500/20">
+                <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white opacity-10 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 rounded-full bg-pink-500 opacity-20 blur-2xl"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div>
+                        <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold tracking-wider mb-3 border border-white/30 text-white shadow-sm">
+                            <i class="fa-solid fa-graduation-cap mr-1"></i> POLYTECHNIC IT
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold mb-2 tracking-tight">Hello, Student! <span class="inline-block animate-[wave_2s_infinite] origin-bottom-right">👋</span></h2>
+                        <p class="text-sm sm:text-base text-indigo-100 max-w-xl opacity-90">This website is designed for IT students to provide all academic resources in one place for easy learning.</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 sm:p-5 text-center min-w-[220px] w-full md:w-auto shadow-lg hover:bg-white/20 transition duration-300">
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping absolute"></span>
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 relative"></span>
+                            <p class="text-[10px] sm:text-xs text-indigo-100 font-bold uppercase tracking-widest" id="next-class-label">Next Class</p>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-white" id="next-class-name">Loading...</h3>
+                        <p class="text-xs sm:text-sm text-indigo-200 mt-1 font-medium" id="next-class-time"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 snap-section">
+                
+                <div class="scroll-animate-left glass-card rounded-3xl p-5 sm:p-7 flex flex-col h-full">
+                    <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-200 dark:border-slate-700/50">
+                        <h3 class="text-base sm:text-lg font-extrabold flex items-center gap-2"><i class="fa-solid fa-calendar-day text-secondary"></i> Today Timetable</h3>
+                        <span class="text-[10px] sm:text-xs bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg font-bold text-slate-600 dark:text-slate-300 shadow-sm" id="day-name">Today</span>
+                    </div>
+                    <div class="space-y-5 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/50 before:via-slate-200 dark:before:via-slate-700 before:to-transparent" id="timetable-list">
+                        <div class="w-full h-16 skeleton-loader mb-2"></div>
+                        <div class="w-full h-16 skeleton-loader mb-2"></div>
+                        <div class="w-full h-16 skeleton-loader"></div>
+                    </div>
+                </div>
+
+                <div class="scroll-animate-up glass-card rounded-3xl p-5 sm:p-7 flex flex-col h-full">
+                    <div class="flex flex-col gap-4 mb-5 pb-4 border-b border-slate-200 dark:border-slate-700/50">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-base sm:text-lg font-extrabold flex items-center gap-2"><i class="fa-solid fa-list-check text-emerald-500"></i> Assignments</h3>
+                            <span id="assignment-progress-text" class="text-xs font-bold text-slate-500">0/6 Done</span>
+                        </div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden shadow-inner border border-slate-200 dark:border-slate-700">
+                            <div id="assignment-progress" class="bg-gradient-to-r from-emerald-400 to-emerald-500 h-2.5 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 flex-1 overflow-y-auto pr-2 custom-scrollbar" id="subject-assignments">
+                        <div id="assignment-container"></div>
+                    </div>
+                </div>
+
+                <div class="scroll-animate-right flex flex-col gap-6 sm:gap-8 h-full">
+                    
+                    <div class="glass-card rounded-3xl p-5 sm:p-7 flex flex-col relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-bl-full -z-10 group-hover:scale-110 transition-transform duration-500"></div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-base sm:text-lg font-extrabold flex items-center gap-2">
+                                <i class="fa-solid fa-bullhorn text-amber-500"></i> Notice Board
+                                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping ml-1"></span>
+                            </h3>
+                            <button onclick="openNoticeModal()" class="ripple-btn text-[10px] sm:text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 px-3 py-1.5 rounded-xl hover:bg-amber-200 transition shadow-sm border border-amber-200 dark:border-amber-800"><i class="fa-solid fa-pen-to-square mr-1"></i> Update</button>
+                        </div>
+                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/10 border-l-4 border-amber-500 p-4 sm:p-5 rounded-r-2xl flex-1 flex flex-col justify-center shadow-sm">
+                            <p id="notice-title" class="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-200 mb-1.5">Board Exam Time Table Out!</p>
+                            <p id="notice-desc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">The date sheet for upcoming exams is out on the RGPV website..</p>
+                            <p id="notice-author" class="text-[10px] sm:text-xs text-amber-600 font-extrabold mt-4 text-right bg-amber-100/50 dark:bg-amber-900/50 inline-block self-end px-3 py-1 rounded-full">- HOD, IT Dept</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-5 sm:p-7">
+                        <h3 class="text-base sm:text-lg font-extrabold mb-5">IMPORTANT Links</h3>
+                        
+                        <a href="https://www.rgpvdiploma.in/" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-between p-4 mb-4 rounded-2xl border border-red-200 dark:border-red-900/50 bg-gradient-to-r from-red-50 to-white dark:from-red-900/20 dark:to-cardDark text-red-700 dark:text-red-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-red-100 dark:bg-red-900/50 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-building-columns text-lg sm:text-xl"></i>
+                                </div>
+                                <div class="text-left">
+                                    <span class="text-sm sm:text-base font-extrabold block">RGPV Diploma</span>
+                                    <span class="text-[10px] sm:text-xs font-semibold opacity-80">Exam Form & Result</span>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                            </div>
+                        </a>
+
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front flex flex-col items-center justify-center gap-2 rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/10 text-blue-700 dark:text-blue-400 shadow-sm">
+                                        <i class="fa-solid fa-book-open text-xl sm:text-2xl mb-1 drop-shadow-sm"></i>
+                                        <span class="text-[10px] sm:text-xs font-bold text-center">Syllabus</span>
+                                    </div>
+                                    <div class="flip-card-back rounded-2xl border border-blue-400 bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg">
+                                        <i class="fa-solid fa-download text-lg mb-1"></i>
+                                        <a href="https://www.rgpvdiploma.in/Academics/AICTEBased.aspx" target="_blank" class="text-[10px] font-bold text-center underline mt-1">Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front flex flex-col items-center justify-center gap-2 rounded-2xl border border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/10 text-purple-700 dark:text-purple-400 shadow-sm">
+                                        <i class="fa-solid fa-file-pdf text-xl sm:text-2xl mb-1 drop-shadow-sm"></i>
+                                        <span class="text-[10px] sm:text-xs font-bold text-center">Class Notes</span>
+                                    </div>
+                                    <div class="flip-card-back rounded-2xl border border-purple-400 bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg">
+                                        <i class="fa-solid fa-folder-open text-lg mb-1"></i>
+                                        <a href="https://share.google/TX4FNgqqvi6sAQaPX" target="_blank" class="text-[10px] font-bold text-center underline mt-1">Open Drive</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front flex flex-col items-center justify-center gap-2 rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 shadow-sm">
+                                        <i class="fa-solid fa-file-contract text-xl sm:text-2xl mb-1 drop-shadow-sm"></i>
+                                        <span class="text-[10px] sm:text-xs font-bold text-center">Previous Paper</span>
+                                    </div>
+                                    <div class="flip-card-back rounded-2xl border border-emerald-400 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg">
+                                        <i class="fa-solid fa-file-lines text-lg mb-1"></i>
+                                        <a href="https://www.rgpvonline.com/rgpv-diploma.html#list" target="_blank" class="text-[10px] font-bold text-center underline mt-1">View Papers</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front flex flex-col items-center justify-center gap-2 rounded-2xl border border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/10 text-orange-700 dark:text-orange-400 shadow-sm">
+                                        <i class="fa-solid fa-laptop-code text-xl sm:text-2xl mb-1 drop-shadow-sm"></i>
+                                        <span class="text-[10px] sm:text-xs font-bold text-center">Lab Manual</span>
+                                    </div>
+                                    <div class="flip-card-back rounded-2xl border border-orange-400 bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">
+                                        <i class="fa-solid fa-code text-lg mb-1"></i>
+                                        <a href="https://share.google/jnC7CcPGO35bb4ivl" target="_blank" class="text-[10px] font-bold text-center underline mt-1">Open Docs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- AI QUIZ -->
+            <div class="snap-section scroll-animate-up glass-card rounded-3xl p-6 sm:p-8 mt-8 border border-white/20">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg">
+                        <i class="fa-solid fa-brain text-lg sm:text-xl animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-white">AI Subject Quiz</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Rohit AI se apne subjects ki practice karein</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject Selector -->
+            <div id="quiz-subject-selector" class="flex flex-wrap gap-2 mb-6">
+                    <button onclick="startAiQuiz('Operating System')" class="ripple-btn px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold text-sm border border-blue-200 dark:border-blue-800 hover:scale-105 transition shadow-sm">OS</button>
+                    <button onclick="startAiQuiz('Computer Networks')" class="ripple-btn px-4 py-2 rounded-xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 font-bold text-sm border border-orange-200 dark:border-orange-800 hover:scale-105 transition shadow-sm">CN</button>
+                    <button onclick="startAiQuiz('Web Technology')" class="ripple-btn px-4 py-2 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 font-bold text-sm border border-purple-200 dark:border-purple-800 hover:scale-105 transition shadow-sm">WT</button>
+                    <button onclick="startAiQuiz('Software Engineering')" class="ripple-btn px-4 py-2 rounded-xl bg-pink-50 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 font-bold text-sm border border-pink-200 dark:border-pink-800 hover:scale-105 transition shadow-sm">S/W Engg</button>
+                    <button onclick="startAiQuiz('DBMS')" class="ripple-btn px-4 py-2 rounded-xl bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 font-bold text-sm border border-teal-200 dark:border-teal-800 hover:scale-105 transition shadow-sm">DBMS</button>
+                </div>
+
+                <div id="quiz-container" class="hidden bg-white/50 dark:bg-slate-800/50 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-inner min-h-[200px]">
+                </div>
+            </div>
+
+            <!-- Admission Form -->
+            <div class="snap-section scroll-animate-up glass-card rounded-3xl p-6 sm:p-8 mt-8 border border-white/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white shadow-lg">
+                        <i class="fa-solid fa-user-plus text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-white">Admission Form</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Submit your details for new admission</p>
+                    </div>
+                </div>
+
+                <form id="admissionForm" class="space-y-4 sm:space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Full Name</label>
+                            <input type="text" name="Name" required placeholder="Your name" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
+                            <input type="email" name="Email" required placeholder="example@gmail.com" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Mobile Number</label>
+                            <input type="tel" name="Phone" required placeholder="+91 XXXXX XXXXX" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">Branch / Course</label>
+                            <select name="Branch" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner text-sm">
+                                <option value="" disabled selected>Course chunein...</option>
+                                <option value="Information Technology (IT)">Information Technology (IT)</option>
+                                <option value="Computer Science (CS)">Computer Science (CS)</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5"> Any Doubt</label>
+                        <textarea name="Message" rows="3" placeholder="You have any Doubt..." class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner text-sm"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="ripple-btn w-full py-3.5 bg-gradient-to-r from-primary via-indigo-500 to-secondary hover:scale-[1.02] text-white rounded-xl font-extrabold transition-all shadow-lg hover:shadow-primary/30 flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> <span id="btnText">Submit Details</span>
+                    </button>
+                </form>
+            </div>
+        </main>
+            
+        <footer class="snap-section scroll-animate-up max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-10">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border border-white/20">
+                <div class="mb-6 text-center">
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white mb-2">About Us</h3>
+                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">This IT Branch Portal is created to help polytechnic students access all academic resources like timetable, assignments, notes and important links in one place.</p>
+                </div>
+                <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent my-6"></div>
+                <div class="mb-6">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-center text-slate-800 dark:text-white mb-4">Group Members</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Rohit Baghel</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Anshika Verma</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Shreya Yadav</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Chandni Pawar</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Chetna Pal</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm hover:scale-105 transition">Vikash Pawar</div>
+                        <div class="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold text-sm shadow-sm col-span-2 sm:col-span-3 hover:scale-105 transition">Pranav Pawar</div>
+                    </div>
+                </div>
+                <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent my-6"></div>
+                <div class="text-center">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-white mb-2">Contact Us</h3>
+                    <a href="mailto:itbranch0123@gmail.com" class="ripple-btn inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-5 py-2.5 rounded-xl font-bold shadow-lg hover:scale-105 transition">
+                    <i class="fa-solid fa-envelope"></i> itbranch0123@gmail.com
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="notice-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 transition-opacity">
+        <div class="glass-card w-full max-w-sm rounded-3xl p-6 sm:p-8 relative shadow-2xl transform scale-95 transition-all duration-300 border border-white/20" id="notice-modal-card">
+            <button onclick="closeNoticeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-extrabold mb-5 text-slate-800 dark:text-white flex items-center"><div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-500 flex items-center justify-center mr-3"><i class="fa-solid fa-pen-to-square"></i></div> Update Notice</h3>
+            <div class="space-y-4 text-sm">
+                <div>
+                    <label class="block font-bold mb-1.5 text-slate-700 dark:text-slate-300">Notice Heading</label>
+                    <input type="text" id="input-notice-title" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner">
+                </div>
+                <div>
+                    <label class="block font-bold mb-1.5 text-slate-700 dark:text-slate-300">Details</label>
+                    <textarea id="input-notice-desc" rows="3" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner"></textarea>
+                </div>
+                <div>
+                    <label class="block font-bold mb-1.5 text-slate-700 dark:text-slate-300">Author (Dene Wala)</label>
+                    <input type="text" id="input-notice-author" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 text-slate-800 dark:text-white outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-inner">
+                </div>
+            </div>
+            <button onclick="saveNotice()" class="ripple-btn w-full mt-6 py-3.5 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-white rounded-xl font-extrabold transition-all shadow-lg hover:shadow-orange-500/30 hover:-translate-y-1">Update Karein</button>
+        </div>
+    </div>
+
+    <div id="install-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 transition-opacity">
+        <div class="glass-card w-full max-w-sm rounded-3xl p-6 sm:p-8 relative shadow-2xl border border-white/20">
+            <button onclick="document.getElementById('install-modal').classList.add('hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl shadow-lg shadow-emerald-500/30 animate-bounce">
+                    <i class="fa-brands fa-android"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-800 dark:text-white">App Install Now</h3>
+                <p class="text-sm text-slate-500 mt-2">Local file direct install nahi hoti. Ise phone home screen par add karne ke steps:</p>
+            </div>
+            <div class="bg-white/50 dark:bg-slate-800/50 rounded-2xl p-4 space-y-3 text-sm font-semibold shadow-inner border border-slate-200 dark:border-slate-700">
+                <div class="flex items-center gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-primary text-white flex items-center justify-center shrink-0 shadow-md">1</span>
+                    <p>Upar right side mein <strong class="text-primary">3 Dots (⋮)</strong> dabayein.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="w-7 h-7 rounded-lg bg-primary text-white flex items-center justify-center shrink-0 shadow-md">2</span>
+                    <p>Menu mein <strong>"Add to Home screen"</strong> chunein.</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('install-modal').classList.add('hidden')" class="ripple-btn w-full mt-6 py-3.5 bg-slate-800 dark:bg-white text-white dark:text-slate-900 rounded-xl font-extrabold transition-transform hover:-translate-y-1 shadow-xl">Samajh Gaya 👍</button>
+        </div>
+    </div>
+
+    <script>
+        // Ripple Effect Logic
+        const rippleButtons = document.querySelectorAll('.ripple-btn');
+        rippleButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                const ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                ripples.classList.add('ripple');
+                this.appendChild(ripples);
+                setTimeout(() => { ripples.remove(); }, 600);
+            });
+        });
+
+        // Splash Screen & Login Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginSection = document.getElementById('login-section');
+            const mainAppContent = document.getElementById('main-app-content');
+            const loginForm = document.getElementById('login-form');
+            const loginError = document.getElementById('login-error');
+            const splashScreen = document.getElementById('splash-screen');
+
+            // Check Login Status
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    if (splashScreen) {
+                        splashScreen.style.opacity = '0'; 
+                        setTimeout(() => {
+                            splashScreen.style.display = 'none';
+                            if (isLoggedIn) {
+                                showMainApp();
+                            } else {
+                                loginSection.classList.remove('hidden');
+                            }
+                        }, 700); 
+                    }
+                }, 1500); // 1.5s display
+            });
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // .trim() space hatane ke liye aur .toLowerCase() capital ko small karne ke liye
+                    const id = document.getElementById('login-id').value.trim().toLowerCase();
+                    const pass = document.getElementById('login-pass').value.trim().toLowerCase();
+
+                    // Ab id 'it2026' aur pass 'i04' se check hoga (case-insensitive)
+                    if (id === 'it2026' && pass === 'i04') {
+                        localStorage.setItem('isLoggedIn', 'true');
+                        loginError.classList.add('hidden');
+                        
+                        loginSection.style.opacity = '0';
+                        setTimeout(() => {
+                            loginSection.classList.add('hidden');
+                            showMainApp();
+                        }, 500);
+                    } else {
+                        loginError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const warningEl = document.getElementById('internet-warning');
+            if (warningEl) warningEl.style.display = 'none';
+
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            themeToggleBtn.addEventListener('click', () => {
+                html.classList.toggle('dark');
+            });
+
+            const clockEl = document.getElementById('live-clock');
+            const dateEl = document.getElementById('current-date');
+            const dayEl = document.getElementById('day-name');
+            let lastRenderedDay = -1;
+
+            const schedule = {
+                1: [
+                    { start: "10:40", end: "12:40", name: "CN-LAB", full: "Computer Networks Lab", teacher: "Mr. R.P. Dhadse", icon: "fa-network-wired" },
+                    { start: "12:40", end: "13:40", name: "EIK", full: "Essence of Indian Knowledge", teacher: "Mrs. Asreen Khan", icon: "fa-book" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "15:00", name: "OS", full: "Operating System", teacher: "Mrs. Bali Sharma", icon: "fa-desktop" },
+                    { start: "15:00", end: "16:00", name: "S/W", full: "Software Engineering", teacher: "Mrs. Asreen Khan", icon: "fa-code" },
+                    { start: "16:00", end: "17:00", name: "WT", full: "Web Technology", teacher: "Mr. Aman Lakhera", icon: "fa-globe" }
+                ],
+                2: [
+                    { start: "10:40", end: "11:40", name: "CN", full: "Computer Networks", teacher: "Mr. R.P. Dhadse", icon: "fa-network-wired" },
+                    { start: "11:40", end: "12:40", name: "S/W", full: "Software Engineering", teacher: "Mrs. Asreen Khan", icon: "fa-code" },
+                    { start: "12:40", end: "13:40", name: "OS", full: "Operating System", teacher: "Mrs. Bali Sharma", icon: "fa-desktop" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "15:00", name: "WT", full: "Web Technology", teacher: "Mr. Aman Lakhera", icon: "fa-globe" },
+                    { start: "15:00", end: "16:00", name: "MIN.PRJ", full: "Minor Project", teacher: "Mrs. Bali Sharma", icon: "fa-project-diagram" },
+                    { start: "16:00", end: "17:00", name: "EIK", full: "Essence of Indian Knowledge", teacher: "Mrs. Asreen Khan", icon: "fa-book" }
+                ],
+                3: [
+                    { start: "10:40", end: "11:40", name: "DBMS", full: "Database Management", teacher: "Mr. Aman Lakhera", icon: "fa-database" },
+                    { start: "11:40", end: "12:40", name: "OS", full: "Operating System", teacher: "Mrs. Bali Sharma", icon: "fa-desktop" },
+                    { start: "12:40", end: "13:40", name: "CN", full: "Computer Networks", teacher: "Mr. R.P. Dhadse", icon: "fa-network-wired" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "16:00", name: "WT-L", full: "Web Technology Lab", teacher: "Mr. Aman Lakhera", icon: "fa-globe" },
+                    { start: "16:00", end: "17:00", name: "S/W", full: "Software Engineering", teacher: "Mrs. Asreen Khan", icon: "fa-code" }
+                ],
+                4: [
+                    { start: "10:40", end: "12:40", name: "OS-LAB", full: "Operating System Lab", teacher: "Mrs. Bali Sharma", icon: "fa-desktop" },
+                    { start: "12:40", end: "13:40", name: "WT", full: "Web Technology", teacher: "Mr. Aman Lakhera", icon: "fa-globe" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "15:00", name: "CN", full: "Computer Networks", teacher: "Mr. R.P. Dhadse", icon: "fa-network-wired" },
+                    { start: "15:00", end: "16:00", name: "DBMS", full: "Database Management", teacher: "Mr. Aman Lakhera", icon: "fa-database" },
+                    { start: "16:00", end: "17:00", name: "LIB", full: "Library", teacher: "Mr. Aman Lakhera", icon: "fa-book-open-reader" }
+                ],
+                5: [
+                    { start: "10:40", end: "11:40", name: "MIN.PRJ", full: "Minor Project", teacher: "Mrs. Bali Sharma", icon: "fa-project-diagram" },
+                    { start: "11:40", end: "12:40", name: "S/W", full: "Software Engineering", teacher: "Mrs. Asreen Khan", icon: "fa-code" },
+                    { start: "12:40", end: "13:40", name: "MIN.PRJ", full: "Minor Project", teacher: "Mrs. Bali Sharma", icon: "fa-project-diagram" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "15:00", name: "OS", full: "Operating System", teacher: "Mrs. Bali Sharma", icon: "fa-desktop" },
+                    { start: "15:00", end: "17:00", name: "DBMS-L", full: "Database Management Lab", teacher: "Mr. Aman Lakhera", icon: "fa-database" }
+                ],
+                6: [
+                    { start: "10:40", end: "12:40", name: "CN-LAB", full: "Computer Networks Lab", teacher: "Mr. R.P. Dhadse", icon: "fa-network-wired" },
+                    { start: "12:40", end: "13:40", name: "WT-L", full: "Web Technology Lab", teacher: "Mr. Aman Lakhera", icon: "fa-globe" },
+                    { start: "13:40", end: "14:00", name: "Lunch Break", type: "break", icon: "fa-utensils" },
+                    { start: "14:00", end: "15:00", name: "WT-L", full: "Web Tech Lab (Cont.)", teacher: "Mr. Aman Lakhera", icon: "fa-globe" },
+                    { start: "15:00", end: "16:00", name: "MIN.PRJ", full: "Minor Project", teacher: "Mrs. Bali Sharma", icon: "fa-project-diagram" },
+                    { start: "16:00", end: "17:00", name: "DBMS", full: "Database Management", teacher: "Mr. Aman Lakhera", icon: "fa-database" }
+                ],
+                0: []
+            };
+
+            function convertToAmPm(time24) {
+                const [h, m] = time24.split(':');
+                let hours = parseInt(h);
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12 || 12;
+                return `${hours}:${m} ${ampm}`;
+            }
+
+            function renderTimetable(now) {
+                const today = now.getDay();
+                let currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+                const classes = schedule[today] || [];
+                const container = document.getElementById('timetable-list');
+                
+                dayEl.innerText = now.toLocaleDateString('en-US', { weekday: 'long' });
+
+                if (classes.length === 0) {
+                    container.innerHTML = '<div class="text-center p-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-200 dark:border-emerald-800"><i class="fa-solid fa-face-smile-beam text-4xl text-emerald-500 mb-3 animate-bounce"></i><p class="font-extrabold text-emerald-700 dark:text-emerald-400 text-lg">Aaj chhutti hai (Holiday)!</p></div>';
+                    document.getElementById('next-class-label').innerText = "Status";
+                    document.getElementById('next-class-name').innerText = "Holiday Relax!";
+                    document.getElementById('next-class-time').innerHTML = "";
+                    return;
+                }
+
+                let html = '';
+                let nextClassFound = false;
+
+                classes.forEach((cls) => {
+                    if (cls.type === 'break') {
+                        html += `
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-transform duration-300 hover:-translate-y-1">
+                                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-orange-100 text-orange-500 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-inner text-sm sm:text-lg z-10"><i class="fa-solid ${cls.icon}"></i></div>
+                                <div class="w-[calc(100%-3.5rem)] sm:w-[calc(100%-4.5rem)] md:w-[calc(50%-2.5rem)] p-3 rounded-2xl border border-orange-200/50 dark:border-orange-900/30 bg-gradient-to-r from-orange-50 to-white dark:from-orange-900/10 dark:to-transparent text-center shadow-sm">
+                                    <span class="text-xs sm:text-sm font-extrabold text-orange-600 dark:text-orange-400">${cls.name} (${convertToAmPm(cls.start)} - ${convertToAmPm(cls.end)})</span>
+                                </div>
+                            </div>`;
+                        return;
+                    }
+
+                    let statusClass, iconBoxClass, icon;
+
+                    if (currentTime > cls.end) {
+                        statusClass = "opacity-60 border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/30 grayscale-[50%]";
+                        iconBoxClass = "bg-slate-200 dark:bg-slate-700 text-slate-500";
+                        icon = "fa-check";
+                    } else if (currentTime >= cls.start && currentTime <= cls.end) {
+                        statusClass = "active-class shadow-md transform scale-[1.02] transition-transform border border-primary/20 bg-white dark:bg-slate-800";
+                        iconBoxClass = "bg-gradient-to-br from-primary to-indigo-600 text-white shadow-lg shadow-primary/40 ring-4 ring-primary/20";
+                        icon = cls.icon;
+                        
+                        document.getElementById('next-class-label').innerText = "Abhi Chal Rahi Hai (Live)";
+                        document.getElementById('next-class-name').innerText = `${cls.name}`;
+                        document.getElementById('next-class-time').innerHTML = `<i class="fa-solid fa-chalkboard-user mr-1"></i> ${cls.teacher} &bull; <span class="text-emerald-300 font-bold">Live Now</span>`;
+                        nextClassFound = true;
+                    } else {
+                        statusClass = "border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 transition hover:bg-white dark:hover:bg-slate-800 hover:shadow-md";
+                        iconBoxClass = "bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 text-slate-400";
+                        icon = "fa-regular fa-clock";
+                        
+                        if (!nextClassFound) {
+                            document.getElementById('next-class-label').innerText = "Agli Class (Next Class)";
+                            document.getElementById('next-class-name').innerText = `${cls.name}`;
+                            document.getElementById('next-class-time').innerHTML = `<i class="fa-solid fa-chalkboard-user mr-1"></i> ${cls.teacher} &bull; ${convertToAmPm(cls.start)}`;
+                            nextClassFound = true;
+                        }
+                    }
+
+                    let timePillClass = currentTime >= cls.start && currentTime <= cls.end 
+                                        ? 'bg-primary/10 text-primary dark:bg-indigo-900/50 dark:text-indigo-300 border border-primary/20' 
+                                        : 'bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700';
+
+                    html += `
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl ${iconBoxClass} shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-sm text-sm sm:text-lg z-10"><i class="fa-solid ${icon}"></i></div>
+                            <div class="w-[calc(100%-3.5rem)] sm:w-[calc(100%-4.5rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-2xl ${statusClass}">
+                                <div class="flex justify-between items-start sm:items-center mb-2 flex-col sm:flex-row gap-2">
+                                    <span class="text-sm sm:text-base font-extrabold ${currentTime >= cls.start && currentTime <= cls.end ? 'text-primary dark:text-indigo-400' : ''} leading-tight">${cls.full}</span>
+                                    <span class="text-[10px] sm:text-xs font-mono font-extrabold px-2.5 py-1 rounded-lg ${timePillClass} whitespace-nowrap shadow-sm">${convertToAmPm(cls.start)} - ${convertToAmPm(cls.end)}</span>
+                                </div>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold"><i class="fa-solid fa-user-tie mr-1 opacity-70"></i> ${cls.teacher}</p>
+                            </div>
+                        </div>`;
+                });
+
+                setTimeout(() => {
+                    container.innerHTML = html;
+                }, 500);
+
+                if (!nextClassFound) {
+                     document.getElementById('next-class-label').innerText = "Status";
+                     document.getElementById('next-class-name').innerText = "Classes Over";
+                     document.getElementById('next-class-time').innerHTML = "Aaj ki classes khatam ho gayi hain. Relax karein!";
+                }
+            }
+
+            function updateTime() {
+                const now = new Date();
+                if(clockEl) clockEl.innerText = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                if(dateEl) dateEl.innerText = now.toLocaleDateString('en-IN', options);
+                
+                const currentDay = now.getDay();
+                if (currentDay !== lastRenderedDay) {
+                    renderTimetable(now);
+                    lastRenderedDay = currentDay;
+                } else if (now.getSeconds() === 0) { 
+                    renderTimetable(now);
+                }
+            }
+            
+            setInterval(updateTime, 1000);
+            updateTime(); 
+
+            // Assignment Section
+            const subjectsList = [
+                { id: 'os', name: 'Operating System (OS)', icon: 'fa-desktop', color: 'blue' },
+                { id: 'cn', name: 'Computer Networks', icon: 'fa-network-wired', color: 'orange' },
+                { id: 'wt', name: 'Web Technology (WT)', icon: 'fa-globe', color: 'purple' },
+                { id: 'sw', name: 'Software Engineering', icon: 'fa-code', color: 'pink' },
+                { id: 'dbms', name: 'DBMS', icon: 'fa-database', color: 'teal' },
+                { id: 'minprj', name: 'Minor Project', icon: 'fa-project-diagram', color: 'yellow' }
+            ];
+
+            function renderAssignments() {
+                const container = document.getElementById('assignment-container');
+                let html = '';
+                subjectsList.forEach(sub => {
+                    html += `
+                    <div class="flex items-center justify-between p-3.5 mb-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" id="sub-card-${sub.id}">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-${sub.color}-100 dark:bg-${sub.color}-900/30 text-${sub.color}-600 dark:text-${sub.color}-400 flex items-center justify-center text-lg shadow-inner"><i class="fa-solid ${sub.icon}"></i></div>
+                            <div><p class="text-sm font-extrabold text-slate-800 dark:text-slate-200">${sub.name}</p></div>
+                        </div>
+                        <button id="btn-${sub.id}" onclick="toggleSubjectStatus('${sub.id}')" class="ripple-btn px-3.5 py-2 rounded-xl text-xs font-black transition-all duration-300 shadow-sm w-[85px] text-center"></button>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+
+            renderAssignments();
+
+            window.updateProgressBar = function() {
+                let total = subjectsList.length;
+                let completed = 0;
+                subjectsList.forEach(sub => {
+                    if(localStorage.getItem('assignment-' + sub.id) === 'true') completed++;
+                });
+                let percent = (completed / total) * 100;
+                document.getElementById('assignment-progress').style.width = percent + '%';
+                document.getElementById('assignment-progress-text').innerText = `${completed}/${total} Done`;
+            }
+
+            window.toggleSubjectStatus = function(subjectId) {
+                let isChecked = localStorage.getItem('assignment-' + subjectId) === 'true';
+                isChecked = !isChecked;
+                updateSubjectUI(subjectId, isChecked);
+                localStorage.setItem('assignment-' + subjectId, isChecked);
+                updateProgressBar();
+            }
+
+            function updateSubjectUI(subjectId, isChecked) {
+                const btn = document.getElementById('btn-' + subjectId);
+                const card = document.getElementById('sub-card-' + subjectId);
+                
+                if(isChecked) {
+                    btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> YES';
+                    btn.className = 'ripple-btn px-3.5 py-2 rounded-xl text-xs font-black transition-all duration-300 shadow-md w-[85px] flex items-center justify-center bg-gradient-to-r from-emerald-400 to-emerald-500 text-white hover:scale-105';
+                    card.classList.add('opacity-80', 'bg-slate-50', 'dark:bg-slate-800/40', 'border-emerald-200', 'dark:border-emerald-800/50');
+                    card.classList.remove('bg-white/80', 'dark:bg-slate-800/80', 'border-slate-200', 'dark:border-slate-700');
+                } else {
+                    btn.innerHTML = '<i class="fa-solid fa-xmark mr-1"></i> NO';
+                    btn.className = 'ripple-btn px-3.5 py-2 rounded-xl text-xs font-black transition-all duration-300 shadow-sm w-[85px] flex items-center justify-center bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:scale-105';
+                    card.classList.remove('opacity-80', 'bg-slate-50', 'dark:bg-slate-800/40', 'border-emerald-200', 'dark:border-emerald-800/50');
+                    card.classList.add('bg-white/80', 'dark:bg-slate-800/80', 'border-slate-200', 'dark:border-slate-700');
+                }
+            }
+
+            subjectsList.forEach(sub => {
+                let savedState = localStorage.getItem('assignment-' + sub.id) === 'true';
+                updateSubjectUI(sub.id, savedState);
+            });
+            updateProgressBar();
+
+            // Notice Board Logic
+            window.openNoticeModal = function() {
+                document.getElementById('input-notice-title').value = document.getElementById('notice-title').innerText;
+                document.getElementById('input-notice-desc').value = document.getElementById('notice-desc').innerText;
+                const rawAuthor = document.getElementById('notice-author').innerText;
+                document.getElementById('input-notice-author').value = rawAuthor.replace('- ', '');
+                
+                const modal = document.getElementById('notice-modal');
+                const modalInner = document.getElementById('notice-modal-card');
+                modal.classList.remove('hidden');
+                setTimeout(() => { modalInner.classList.remove('scale-95'); modalInner.classList.add('scale-100'); }, 10);
+            }
+
+            window.closeNoticeModal = function() {
+                const modal = document.getElementById('notice-modal');
+                const modalInner = document.getElementById('notice-modal-card');
+                modalInner.classList.remove('scale-100'); 
+                modalInner.classList.add('scale-95');
+                setTimeout(() => { modal.classList.add('hidden'); }, 300);
+            }
+
+            window.saveNotice = function() {
+                const title = document.getElementById('input-notice-title').value;
+                const desc = document.getElementById('input-notice-desc').value;
+                const author = document.getElementById('input-notice-author').value;
+
+                if(title.trim() === '' || desc.trim() === '') {
+                    alert('Title aur Details bharna zaroori hai!');
+                    return;
+                }
+
+                document.getElementById('notice-title').innerText = title;
+                document.getElementById('notice-desc').innerText = desc;
+                document.getElementById('notice-author').innerText = '- ' + author;
+
+                const noticeData = { title, desc, author: '- ' + author };
+                localStorage.setItem('polytechnic-notice', JSON.stringify(noticeData));
+
+                closeNoticeModal();
+            }
+
+            const savedNotice = localStorage.getItem('polytechnic-notice');
+            if (savedNotice) {
+                const noticeData = JSON.parse(savedNotice);
+                document.getElementById('notice-title').innerText = noticeData.title;
+                document.getElementById('notice-desc').innerText = noticeData.desc;
+                document.getElementById('notice-author').innerText = noticeData.author;
+            }
+
+            // PWA Setup
+            const manifest = {
+                name: "IT Branch Pro",
+                short_name: "IT Portal V2",
+                start_url: ".", 
+                display: "standalone",
+                background_color: "#0b1120",
+                theme_color: "#4f46e5",
+                icons: [
+                    { src: "https://cdn-icons-png.flaticon.com/512/2942/2942789.png", sizes: "192x192", type: "image/png" },
+                    { src: "https://cdn-icons-png.flaticon.com/512/2942/2942789.png", sizes: "512x512", type: "image/png" }
+                ]
+            };
+            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/manifest+json'});
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = URL.createObjectURL(manifestBlob);
+            document.head.appendChild(link);
+
+            const swCode = `self.addEventListener('fetch', function(e) {});`;
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>console.log("SW local block"));
+            }
+            
+            let deferredPrompt;
+            const installBtn = document.getElementById('install-app-btn');
+            const installModal = document.getElementById('install-modal');
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+            });
+
+            installBtn.addEventListener('click', async () => {
+                if (window.location.protocol === 'file:' || !deferredPrompt) {
+                    installModal.classList.remove('hidden');
+                } else {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        installBtn.style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                }
+            });
+
+            // Google Sheets Submit Logic
+            const admissionForm = document.getElementById('admissionForm');
+            
+            if(admissionForm) {
+                admissionForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); 
+                    
+                    const submitBtn = document.getElementById('submitBtn');
+                    const btnText = document.getElementById('btnText');
+                    
+                    btnText.innerText = "Please wait...";
+                    submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+                    submitBtn.disabled = true;
+
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwF1hup3gdzSRPVEEFSi0jy6HUhvR1Ct-PBRhfeu7y3motY3RsvoZh5-_Jywyf2LsJ/exec'; 
+                    
+                    const formData = new FormData(this);
+
+                    fetch(scriptURL, { 
+                        method: 'POST', 
+                        body: formData,
+                        mode: 'no-cors' 
+                    })
+                    .then(() => {
+                        alert("🎉 Success! Aapki details submit ho gayi hain aur Google Sheet mein chali gayi hain.");
+                        admissionForm.reset(); 
+                        
+                        btnText.innerText = "Submit Details";
+                        submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                        submitBtn.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert("Oops! Network error. Dubara try karein.");
+                        
+                        btnText.innerText = "Submit Details";
+                        submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
+        });
+
+        function showMainApp() {
+            const mainAppContent = document.getElementById('main-app-content');
+            mainAppContent.classList.remove('hidden');
+            setTimeout(() => {
+                mainAppContent.classList.remove('opacity-0');
+                mainAppContent.classList.add('opacity-100');
+            }, 50);
+        }
+
+        window.logout = function() {
+            localStorage.removeItem('isLoggedIn');
+            location.reload();
+        }
+        
+        const apiKey = ""; // Kripya local use ke liye yahan apni Gemini API Key daalein
+
+        // ==========================================
+        // AI QUIZ LOGIC (STRICT NO-REPEAT & OFFLINE QUEUE)
+        // ==========================================
+        let currentQuizData = null;
+        window.askedQuestionsHistory = {}; 
+        window.unaskedOfflineIndices = {}; 
+
+        const syllabusData = {
+            'Operating System': [
+                "UNIX/LINUX Architecture, Kernel and system calls", 
+                "Process Scheduling, IPC, and Multi-threaded programming",
+                "Memory Swapping, Paging, Segmentation and Virtual Memory",
+                "File concept, access methods and directory structure",
+                "Disk structure, scheduling algorithms and RAID",
+                "OS Security, Authentication and Access Control"
+            ],
+            'Computer Networks': [
+                "OSI Reference Model and TCP/IP Model",
+                "Wired Media (Coaxial, UTP, Fiber) and Wireless Media",
+                "Data Link Layer protocols (Ethernet, WLAN, Bluetooth)",
+                "Network Layer: IPv4, Routing algorithms (RIP, OSPF)",
+                "Transport Layer (TCP) and Application Layer (SMTP, DNS)",
+                "Networking Devices (NIC, Switch, Router) and SNMP"
+            ],
+            'Web Technology': [
+                "Web servers (UNIX/LINUX), Protocols, and 3-Tier architecture",
+                "Caches, Proxies, Indexes, and Load Balancers",
+                "JavaScript DOM, functions, and events",
+                "AJAX based applications and alternatives",
+                "XML, DTD, Schemas, XSL and XSLT",
+                "PHP Server side scripting, Arrays, and Forms",
+                "PHP Database connection (MySQL) and queries"
+            ],
+            'Software Engineering': [
+                "Software Lifecycle and Process Models (Traditional v/s Agile)",
+                "Requirements Gathering, Analysis and Software architecture",
+                "Unit, Integration, System and Acceptance Testing",
+                "Software Quality Assurance and writing test cases",
+                "Configuration and Version Control (Git)",
+                "Software Maintenance and Project Metrics"
+            ],
+            'DBMS': [
+                "Database System Concepts and Architecture",
+                "ER Model and Enhanced Entity-Relationship (EER) model",
+                "Relational Algebra, Relational Calculus and Constraints",
+                "SQL-99 Schema definition, Queries, Views and Security",
+                "Functional dependencies and Normalization",
+                "Relational database design algorithms"
+            ]
+        };
+
+        async function startAiQuiz(subject) {
+            const container = document.getElementById('quiz-container');
+            container.classList.remove('hidden');
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            container.innerHTML = `
+                <div class="space-y-4 py-4">
+                    <div class="h-6 w-1/3 skeleton-loader rounded-full"></div>
+                    <div class="h-4 w-full skeleton-loader rounded-full"></div>
+                    <div class="h-4 w-5/6 skeleton-loader rounded-full mb-6"></div>
+                    
+                    <div class="h-12 w-full skeleton-loader rounded-xl"></div>
+                    <div class="h-12 w-full skeleton-loader rounded-xl"></div>
+                    <div class="h-12 w-full skeleton-loader rounded-xl"></div>
+                    <div class="h-12 w-full skeleton-loader rounded-xl"></div>
+                    
+                    <p class="text-sm font-bold text-slate-500 dark:text-slate-400 animate-pulse text-center mt-4">AI <span class="text-primary">${subject}</span> ka ekdum naya question bana raha hai...</p>
+                </div>
+            `;
+
+            try {
+                if (!apiKey || apiKey.trim() === '') {
+                    throw new Error('API Key missing, running fallback quiz');
+                }
+
+                const subjectTopics = syllabusData[subject] || ["Basic concepts"];
+                const randomTopic = subjectTopics[Math.floor(Math.random() * subjectTopics.length)];
+                const randomSeed = Math.floor(Math.random() * 9999999);
+
+                if(!window.askedQuestionsHistory[subject]) window.askedQuestionsHistory[subject] = [];
+                const history = window.askedQuestionsHistory[subject];
+                
+                let historyPrompt = "";
+                if (history.length > 0) {
+                    historyPrompt = `CRITICAL INSTRUCTION: You are strictly FORBIDDEN from generating a question similar to any of these previously asked questions: ${JSON.stringify(history)}. You MUST produce a completely NEW and DIFFERENT question.`;
+                }
+
+                const prompt = `You are an IT professor testing a 4th-semester polytechnic diploma student. 
+                Generate 1 completely UNIQUE and NEVER BEFORE SEEN multiple choice question about '${subject}'.
+                The question MUST be strictly based on this specific syllabus topic: '${randomTopic}'. 
+                ${historyPrompt}
+                Use this random seed to guarantee a new variation: ${randomSeed}.
+                Return ONLY a valid JSON object (NO markdown, NO code blocks, NO extra text) with this exact structure: 
+                {"question": "The question text in Hinglish", "options": ["Option A", "Option B", "Option C", "Option D"], "correctIndex": 0, "explanation": "Short explanation in Hinglish why this is correct."}`;
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: {
+                            temperature: 1.0 
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if(!data.candidates || data.candidates.length === 0) {
+                    throw new Error('Invalid API response');
+                }
+
+                let textResponse = data.candidates[0].content.parts[0].text;
+                textResponse = textResponse.replace(/```json/g, '').replace(/```/g, '').trim();
+                
+                let quizObj = JSON.parse(textResponse);
+                if (Array.isArray(quizObj)) quizObj = quizObj[0];
+                
+                currentQuizData = quizObj;
+                
+                window.askedQuestionsHistory[subject].push(currentQuizData.question);
+                if(window.askedQuestionsHistory[subject].length > 20) {
+                    window.askedQuestionsHistory[subject].shift(); 
+                }
+
+                renderQuiz(subject);
+
+            } catch (error) {
+                console.warn("Quiz Error (Using Fallback):", error.message);
+                fallbackQuiz(subject);
+            }
+        }
+
+        function renderQuiz(subject) {
+            const container = document.getElementById('quiz-container');
+            let optionsHtml = '';
+            
+            currentQuizData.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button onclick="submitAnswer(${idx})" id="opt-btn-${idx}" class="w-full text-left p-3.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 transition font-medium text-sm shadow-sm group relative overflow-hidden">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-bold mr-3 group-hover:bg-primary group-hover:text-white transition-colors shadow-inner">${String.fromCharCode(65 + idx)}</span>
+                        <span class="relative z-10 text-slate-700 dark:text-slate-200">${opt}</span>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="flex justify-between items-start mb-4 gap-4">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800/50 rounded-lg text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-bolt text-yellow-500"></i> ${subject} Quiz
+                    </span>
+                    <button onclick="document.getElementById('quiz-container').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <h4 class="text-base sm:text-lg font-extrabold text-slate-800 dark:text-white mb-6 leading-relaxed">${currentQuizData.question}</h4>
+                <div class="space-y-3 mb-6">
+                    ${optionsHtml}
+                </div>
+                <div id="quiz-feedback" class="hidden rounded-xl p-4 text-sm font-medium animate-slide-up delay-100"></div>
+                <button onclick="startAiQuiz('${subject}')" id="next-quiz-btn" class="hidden ripple-btn mt-5 px-5 py-2.5 bg-gradient-to-r from-slate-800 to-slate-700 dark:from-slate-200 dark:to-white text-white dark:text-slate-800 rounded-xl font-extrabold text-sm hover:-translate-y-0.5 transition shadow-lg items-center gap-2">
+                    Naya Question <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            `;
+        }
+
+        function submitAnswer(selectedIndex) {
+            const correctIdx = currentQuizData.correctIndex;
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const nextBtn = document.getElementById('next-quiz-btn');
+
+            for(let i=0; i<4; i++) {
+                const btn = document.getElementById('opt-btn-' + i);
+                if(!btn) continue;
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-slate-50', 'dark:hover:bg-slate-600', 'cursor-pointer');
+                
+                if(i === correctIdx) {
+                    btn.classList.add('bg-emerald-50', 'border-emerald-400', 'ring-2', 'ring-emerald-400/20', 'dark:bg-emerald-900/30', 'dark:border-emerald-500');
+                    btn.querySelector('span:first-child').classList.add('bg-emerald-500', 'text-white');
+                    btn.querySelector('span:first-child').classList.remove('text-slate-500', 'dark:text-slate-400');
+                } else if (i === selectedIndex && selectedIndex !== correctIdx) {
+                    btn.classList.add('bg-red-50', 'border-red-400', 'dark:bg-red-900/30', 'dark:border-red-500');
+                    btn.querySelector('span:first-child').classList.add('bg-red-500', 'text-white');
+                    btn.querySelector('span:first-child').classList.remove('text-slate-500', 'dark:text-slate-400');
+                } else {
+                    btn.classList.add('opacity-40');
+                }
+            }
+
+            feedbackEl.classList.remove('hidden');
+            if(selectedIndex === correctIdx) {
+                feedbackEl.classList.add('bg-emerald-50', 'text-emerald-800', 'border', 'border-emerald-200', 'dark:bg-emerald-900/20', 'dark:border-emerald-800/50', 'dark:text-emerald-300');
+                feedbackEl.innerHTML = `<strong class="text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-base"><i class="fa-solid fa-circle-check text-lg"></i> Sahi Jawab! (Correct)</strong><div class="mt-2 text-slate-600 dark:text-slate-300">${currentQuizData.explanation}</div>`;
+            } else {
+                feedbackEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200', 'dark:bg-red-900/20', 'dark:border-red-800/50', 'dark:text-red-300');
+                feedbackEl.innerHTML = `<strong class="text-red-600 dark:text-red-400 flex items-center gap-2 text-base"><i class="fa-solid fa-circle-xmark text-lg"></i> Galat Jawab! (Incorrect)</strong><div class="mt-2 text-slate-600 dark:text-slate-300">${currentQuizData.explanation}</div>`;
+            }
+            
+            nextBtn.classList.remove('hidden');
+            nextBtn.classList.add('flex');
+        }
+
+        function fallbackQuiz(subject) {
+            const fallbacks = {
+                'Operating System': [
+                    { question: "UNIX/LINUX architecture mein core component kaun sa hota hai jo hardware aur applications ke beech interface ka kaam karta hai?", options: ["Shell", "Kernel", "Compiler", "GUI"], correctIndex: 1, explanation: "Kernel operating system ka core component hota hai jo hardware resources ko manage karta hai aur system calls handle karta hai." },
+                    { question: "Deadlock tab hota hai jab:", options: ["Memory full ho jaye", "Do ya usse zyada processes ek dusre ke resources ka wait karein", "CPU bahut heat ho jaye", "Hard disk fail ho jaye"], correctIndex: 1, explanation: "Deadlock us situation ko kehte hain jahan har process kisi dusri process dwara hold kiye gaye resource ka wait karti hai." },
+                    { question: "Inmein se kaun sa Page Replacement algorithm nahi hai?", options: ["FIFO", "LRU", "Optimal", "Round Robin"], correctIndex: 3, explanation: "Round Robin ek CPU scheduling algorithm hai, jabki FIFO aur LRU page replacement algorithms hain." },
+                    { question: "Disk storage mein data loss se bachne aur performance badhane ke liye kaun si technique use hoti hai?", options: ["Paging", "Swapping", "RAID", "Spooling"], correctIndex: 2, explanation: "RAID (Redundant Array of Independent Disks) multiple disks ko use karke data redundancy aur performance improve karta hai." },
+                    { question: "Virtual Memory ka main advantage kya hai?", options: ["CPU ki speed badhana", "Main memory (RAM) se badhe programs ko execute karna", "Disk space bachana", "Virus se system ko protect karna"], correctIndex: 1, explanation: "Virtual memory OS ko un programs ko run karne ki suvidha deti hai jo physical RAM se bade hote hain, secondary storage ka use karke." },
+                    { question: "Process state 'Blocked' ka kya matlab hai?", options: ["Process run ho rahi hai", "Process CPU ka wait kar rahi hai", "Process kisi I/O event ka wait kar rahi hai", "Process terminate ho gayi hai"], correctIndex: 2, explanation: "Jab process ko aage badhne ke liye kisi I/O operation ka wait karna padta hai toh wo 'Blocked' ya 'Waiting' state mein chali jati hai." },
+                    { question: "IPC ka full form Operating System mein kya hota hai?", options: ["Internal Process Communication", "Inter-Process Communication", "Internet Protocol Control", "Integrated Process Core"], correctIndex: 1, explanation: "Inter-Process Communication (IPC) OS ka mechanism hai jisse alag-alag processes ek dusre ke sath data share ya communicate karti hain." },
+                    { question: "Thrashing OS mein kab aati hai?", options: ["Jab CPU overheat ho", "Jab system execution se zyada paging (page faults) mein time spend kare", "Jab hard disk fail ho jaye", "Jab RAM empty ho"], correctIndex: 1, explanation: "Thrashing ek aisi condition hai jahan page faults itne high ho jate hain ki CPU utilization ekdum gir jata hai." }
+                ],
+                'Computer Networks': [
+                    { question: "OSI Reference Model mein kitni layers hoti hain?", options: ["4", "5", "7", "9"], correctIndex: 2, explanation: "OSI (Open Systems Interconnection) model mein 7 layers hoti hain (Physical se lekar Application layer tak)." },
+                    { question: "Kaun sa protocol email send karne ke liye responsible hota hai?", options: ["POP3", "IMAP", "SMTP", "FTP"], correctIndex: 2, explanation: "SMTP (Simple Mail Transfer Protocol) emails ko network ke through send karne ke liye use hota hai." },
+                    { question: "OSPF aur RIP kis type ke network protocols hain?", options: ["Routing Protocols", "Application Protocols", "MAC Protocols", "Security Protocols"], correctIndex: 0, explanation: "OSPF (Open Shortest Path First) aur RIP (Routing Information Protocol) Network layer par routing ke liye use hote hain." },
+                    { question: "Wired media mein, sabse fast data transfer kis cable mein hota hai?", options: ["Coaxial Cable", "UTP Cable", "Fiber Optic Cable", "STP Cable"], correctIndex: 2, explanation: "Fiber Optic cable light signals ka use karti hai, isliye iski bandwidth aur speed sabse zyada hoti hai." },
+                    { question: "Network Management System (NMS) ke liye commonly kaun sa protocol use kiya jata hai?", options: ["HTTP", "SNMP", "DNS", "TCP"], correctIndex: 1, explanation: "SNMP (Simple Network Management Protocol) network devices ko manage aur monitor karne ke liye use hota hai." },
+                    { question: "IPv4 address kitne bit ka hota hai?", options: ["16-bit", "32-bit", "64-bit", "128-bit"], correctIndex: 1, explanation: "IPv4 address 32-bit ka lamba numeric address hota hai, jabki IPv6 128-bit ka hota hai." },
+                    { question: "MAC address OSI model ki kis layer par kaam karta hai?", options: ["Physical Layer", "Data Link Layer", "Network Layer", "Transport Layer"], correctIndex: 1, explanation: "MAC address (Physical address) Data Link Layer (Layer 2) ki responsibility hoti hai." },
+                    { question: "TCP aur UDP mein sabse bada difference kya hai?", options: ["TCP fast hai", "TCP connection-oriented hai aur reliable hai, jabki UDP connectionless hai", "UDP reliable hai", "TCP video streaming ke liye best hai"], correctIndex: 1, explanation: "TCP data delivery ki guarantee deta hai (connection-oriented), par UDP bina guarantee ke fast data bhejta hai (connectionless)." }
+                ],
+                'Web Technology': [
+                    { question: "Web Application Architecture mein 3-tier model ke parts kaun se hote hain?", options: ["Client, Server, Internet", "Presentation, Application, Data", "HTML, CSS, JS", "Browser, Proxy, Router"], correctIndex: 1, explanation: "3-tier architecture mein Presentation layer (UI), Application layer (Logic), aur Data layer (Database) hote hain." },
+                    { question: "XML mein document ka structure define karne ke liye kiska use kiya jata hai?", options: ["HTML tags", "DTD (Document Type Definition)", "CSS", "PHP"], correctIndex: 1, explanation: "DTD aur XML Schemas ka use XML document ka structure aur rules define karne ke liye hota hai." },
+                    { question: "Bina page reload kiye server se data fetch karne ke liye kaun si technique use hoti hai?", options: ["PHP Forms", "DHTML", "AJAX", "XSLT"], correctIndex: 2, explanation: "AJAX (Asynchronous JavaScript and XML) ka use background mein data load karne ke liye hota hai bina page refresh kiye." },
+                    { question: "PHP mein database connect karne ke liye usually kaun sa function use karte hain?", options: ["db_connect()", "mysqli_connect()", "sql_open()", "connect_db()"], correctIndex: 1, explanation: "PHP mein MySQL database se connection banane ke liye mysqli_connect() ya PDO ka istemal kiya jata hai." },
+                    { question: "Inmein se kya JavaScript ka part nahi hai?", options: ["DOM", "Variables", "Loops", "XSLT"], correctIndex: 3, explanation: "XSLT (Extensible Stylesheet Language Transformations) XML ko transform karne ke liye use hota hai, JS ka part nahi hai." },
+                    { question: "PHP files ka default extension kya hota hai?", options: [".ph", ".html", ".xml", ".php"], correctIndex: 3, explanation: "PHP code wali files hamesha .php extension ke sath save hoti hain taaki server unhe execute kar sake." },
+                    { question: "HTML tags ko style karne ke liye konsi technology best hai?", options: ["JavaScript", "XML", "CSS", "AJAX"], correctIndex: 2, explanation: "CSS (Cascading Style Sheets) ka use HTML elements ko design aur style dene ke liye kiya jata hai." },
+                    { question: "PHP mein arrays banane ke liye kaun sa keyword use hota hai?", options: ["list()", "array()", "vector()", "collection()"], correctIndex: 1, explanation: "PHP mein arrays declare karne ke liye array() function ya square brackets [] ka use hota hai." }
+                ],
+                'Software Engineering': [
+                    { question: "SDLC ka traditional aur sabse basic process model kaun sa hai?", options: ["Agile Model", "Spiral Model", "Waterfall Model", "RAD Model"], correctIndex: 2, explanation: "Waterfall model SDLC ka sabse pehla aur traditional linear-sequential model hai." },
+                    { question: "Software development mein Version Control System (VCS) ka best example kaun sa hai?", options: ["Microsoft Word", "Git", "Notepad++", "JIRA"], correctIndex: 1, explanation: "Git ek popular version control tool hai jo source code mein changes ko track karne ke liye use hota hai." },
+                    { question: "Testing ka wo prakar jismein internal code ya logic dekha jata hai, kya kehlata hai?", options: ["Black Box Testing", "White Box Testing", "Acceptance Testing", "System Testing"], correctIndex: 1, explanation: "White Box Testing (ya Glass Box Testing) mein tester ko software ke internal structure aur code ki knowledge hoti hai." },
+                    { question: "Agile methodology ka main focus kis par hota hai?", options: ["Heavy documentation", "Iterative development aur customer feedback", "Fixed requirements", "Long development cycles"], correctIndex: 1, explanation: "Agile development iterative hota hai aur isme continuous customer involvement par focus hota hai." },
+                    { question: "Requirements Gathering ke baad kaun sa document tayyar kiya jata hai?", options: ["Test Plan", "Architecture Design", "SRS (Software Requirement Specification)", "Release Notes"], correctIndex: 2, explanation: "SRS document mein system ki saari functional aur non-functional requirements detail mein likhi jati hain." },
+                    { question: "Maintenance phase SDLC mein kab aata hai?", options: ["Sabse pehle", "Coding ke dauran", "Testing se pehle", "Deployment aur delivery ke baad"], correctIndex: 3, explanation: "Software jab client ko deliver ho jata hai, uske baad bugs theek karne ya naye features ke liye Maintenance phase aata hai." },
+                    { question: "Unit Testing kiske dwara ki jati hai?", options: ["Customers", "End Users", "Developers", "Project Managers"], correctIndex: 2, explanation: "Unit Testing usually programmers/developers dwara code likhne ke turant baad modules test karne ke liye ki jati hai." },
+                    { question: "Inmein se kaun sa Architectural Style nahi hai?", options: ["Client-Server", "Peer-to-Peer", "Data-Centered", "Object-Oriented Programming"], correctIndex: 3, explanation: "OOP ek programming paradigm hai, jabki baki sab software architecture styles hain." }
+                ],
+                'DBMS': [
+                    { question: "ER Model mein kisi entity ki property ya characteristic ko kya kehte hain?", options: ["Relationship", "Attribute", "Tuple", "Key"], correctIndex: 1, explanation: "Entity-Relationship model mein entities ki properties ko 'Attributes' kaha jata hai (jaise Student ka Name)." },
+                    { question: "Inmein se kaun sa Data Definition Language (DDL) command hai?", options: ["SELECT", "INSERT", "CREATE", "UPDATE"], correctIndex: 2, explanation: "CREATE, ALTER, DROP commands DDL ke andar aate hain jo database ka schema define karte hain." },
+                    { question: "Database normalization ka primary goal kya hai?", options: ["Database size badhana", "Data redundancy (duplication) ko kam karna", "Queries ko slow karna", "Data delete karna"], correctIndex: 1, explanation: "Normalization ka main purpose database design ko aasa banana aur repeated data ko minimize karna hota hai." },
+                    { question: "Relational Algebra mein specific rows (tuples) ko select karne ke liye kaun sa operation use hota hai?", options: ["Projection (π)", "Selection (σ)", "Union (∪)", "Join (⨝)"], correctIndex: 1, explanation: "Selection (Sigma - σ) operation conditions ke base par relation se specific rows filter karne ke liye use hota hai." },
+                    { question: "Views in SQL kya hote hain?", options: ["Actual physical tables", "Virtual tables jo kisi query ke result par aadharit hoti hain", "Database users", "Storage devices"], correctIndex: 1, explanation: "View ek virtual table hoti hai jiska apna koi data nahi hota, balki ye base tables par likhi gayi query ka result dikhati hai." },
+                    { question: "Database transaction ki properties ko kis acronym se jana jata hai?", options: ["BASE", "SOLID", "ACID", "LAMP"], correctIndex: 2, explanation: "Database transactions ki 4 main properties hoti hain: Atomicity, Consistency, Isolation, aur Durability (ACID)." },
+                    { question: "Ek table ke columns ko relational algebra mein kya kaha jata hai?", options: ["Tuples", "Attributes", "Degrees", "Domains"], correctIndex: 1, explanation: "Columns ko Attributes ya Fields kaha jata hai, jabki rows ko Tuples kaha jata hai." },
+                    { question: "Kaun sa constraint ye ensure karta hai ki table mein kisi column mein duplicate value na ho?", options: ["NOT NULL", "CHECK", "FOREIGN KEY", "UNIQUE"], correctIndex: 3, explanation: "UNIQUE constraint column mein duplicate values ko allow nahi karta hai." }
+                ]
+            };
+            
+            const subjectQuestions = fallbacks[subject] || fallbacks['Web Technology'];
+            
+            if (!window.unaskedOfflineIndices[subject] || window.unaskedOfflineIndices[subject].length === 0) {
+                window.unaskedOfflineIndices[subject] = subjectQuestions.map((_, index) => index);
+            }
+            
+            const randomQueueIndex = Math.floor(Math.random() * window.unaskedOfflineIndices[subject].length);
+            const selectedQuestionIndex = window.unaskedOfflineIndices[subject][randomQueueIndex];
+            
+            window.unaskedOfflineIndices[subject].splice(randomQueueIndex, 1);
+
+            const randomQuiz = subjectQuestions[selectedQuestionIndex];
+            
+            currentQuizData = JSON.parse(JSON.stringify(randomQuiz));
+            currentQuizData.explanation += " (Note: Yeh offline question hai kyunki AI API key set nahi hai).";
+            
+            setTimeout(() => {
+                 renderQuiz(subject);
+            }, 800); 
+        }
+    </script>
+</body>
+</html>
